@@ -1,6 +1,8 @@
+
 import random
 import string
 import argparse
+from colorama import Fore, Style
 
 def generate_password(length=12, use_letters=True, use_numbers=True, use_symbols=True):
     """
@@ -63,31 +65,24 @@ def check_password_strength(password):
         return "Weak" 
 
 def main():
-    # Ajout de argparse pour gérer les arguments en ligne de commande
     parser = argparse.ArgumentParser(description="Password Generator")
-    parser.add_argument("-l", "--length", type=int, default=12, help="Length of the password")  # Option pour la longueur
-    parser.add_argument("--no-letters", action="store_true", help="Exclude letters")  # Option pour exclure les lettres
-    parser.add_argument("--no-numbers", action="store_true", help="Exclude numbers")  # Option pour exclure les chiffres
-    parser.add_argument("--no-symbols", action="store_true", help="Exclude symbols")  # Option pour exclure les symboles
-    parser.add_argument("-n", "--number", type=int, default=1, help="Number of passwords to generate")  # Option pour le nombre de mots de passe
+    parser.add_argument("-l", "--length", type=int, default=12, help="Length of the password")
+    parser.add_argument("--no-letters", action="store_true", help="Exclude letters")
+    parser.add_argument("--no-numbers", action="store_true", help="Exclude numbers")
+    parser.add_argument("--no-symbols", action="store_true", help="Exclude symbols")
+    parser.add_argument("-n", "--number", type=int, default=1, help="Number of passwords to generate")
     args = parser.parse_args()
 
-    # Génération de plusieurs mots de passe
     for _ in range(args.number):
         password = generate_password(
             length=args.length,
             use_letters=not args.no_letters,
             use_numbers=not args.no_numbers,
-            use_symbols=not args.no_symbols,
+            use_symbols=not args.no_symbols
         )
-        # Affichage du mot de passe et de sa force
-        print(f"Generated password: {password}")
-        print(f"Password strength: {check_password_strength(password)}")
+        print(Fore.GREEN + "Generated password: " + Style.RESET_ALL + password)
+        print(Fore.BLUE + f"Password strength: {check_password_strength(password)}" + Style.RESET_ALL)
         print("-" * 20)
 
-    
-    password = generate_password()
-    print(f"Generated password: {password}")
-
 if __name__ == "__main__":
-   main()
+    main()
