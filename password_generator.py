@@ -71,6 +71,7 @@ def main():
     parser.add_argument("--no-numbers", action="store_true", help="Exclude numbers")
     parser.add_argument("--no-symbols", action="store_true", help="Exclude symbols")
     parser.add_argument("-n", "--number", type=int, default=1, help="Number of passwords to generate")
+    parser.add_argument("--save", action="store_true", help="Save generated passwords to a file")
     args = parser.parse_args()
 
     for _ in range(args.number):
@@ -83,6 +84,11 @@ def main():
         print(Fore.GREEN + "Generated password: " + Style.RESET_ALL + password)
         print(Fore.BLUE + f"Password strength: {check_password_strength(password)}" + Style.RESET_ALL)
         print("-" * 20)
+
+        # Save password to file if --save is used
+        if args.save:
+            with open("generated_passwords.txt", "a") as file:
+                file.write(password + "\n")
 
 if __name__ == "__main__":
     main()
