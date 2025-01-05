@@ -34,7 +34,7 @@ def generate_password(length=12, use_letters=True, use_numbers=True, use_symbols
     password = ''.join(random.choice(chars) for _ in range(length))
     return password
 
-# Nouvelle fonction : Vérificateur de force du mot de passe
+# New Feature: Password Strength Checker
 def check_password_strength(password):
     """
     Checks the strength of a password based on length and character diversity.
