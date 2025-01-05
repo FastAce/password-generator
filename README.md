@@ -45,7 +45,7 @@ Save generated passwords to a file:
 python password_generator.py --length 16 --number 5 --save
 ```
 
-##Import in your own project:
+## Import in your own project:
 ```python
 from password_generator import generate_password
 
