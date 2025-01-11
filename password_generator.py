@@ -82,7 +82,13 @@ def main():
             use_symbols=not args.no_symbols
         )
         print(Fore.GREEN + "Generated password: " + Style.RESET_ALL + password)
-        print(Fore.BLUE + f"Password strength: {check_password_strength(password)}" + Style.RESET_ALL)
+	strength = check_password_strength(password)
+	if strength == "Weak":
+	    print(Fore.RED + f"Password strength: {strength}" + Style.RESET_ALL)
+   	elif strength == "Moderate":
+            print(Fore.YELLOW + f"Password strength: {strength}" + Style.RESET_ALL)
+   	else:  # Strong
+            print(Fore.BLUE + f"Password strength: {strength}" + Style.RESET_ALL)
         print("-" * 20)
 
         # Save password to file if --save is used
