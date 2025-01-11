@@ -1,23 +1,22 @@
-
 import random
 import string
 import argparse
 from colorama import Fore, Style
 
+# Fonction de génération de mot de passe
 def generate_password(length=12, use_letters=True, use_numbers=True, use_symbols=True):
     """
-    Generates a random password with specified criteria
+    Generates a random password with specified criteria.
     
     Args:
-        length (int): Length of the password
-        use_letters (bool): Include letters
-        use_numbers (bool): Include numbers
-        use_symbols (bool): Include special characters
+        length (int): Length of the password.
+        use_letters (bool): Include letters.
+        use_numbers (bool): Include numbers.
+        use_symbols (bool): Include special characters.
     
     Returns:
-        str: Generated password
+        str: Generated password.
     """
-    # Define possible characters
     chars = ''
     if use_letters:
         chars += string.ascii_letters
@@ -26,15 +25,12 @@ def generate_password(length=12, use_letters=True, use_numbers=True, use_symbols
     if use_symbols:
         chars += string.punctuation
 
-    # Check if at least one character type is selected
     if not chars:
-        return "Error: Select at least one character type"
+        return "Error: Select at least one character type."
 
-    # Generate password
-    password = ''.join(random.choice(chars) for _ in range(length))
-    return password
+    return ''.join(random.choice(chars) for _ in range(length))
 
-# New Feature: Password Strength Checker
+# Vérificateur de force du mot de passe
 def check_password_strength(password):
     """
     Checks the strength of a password based on length and character diversity.
@@ -62,17 +58,21 @@ def check_password_strength(password):
     elif strength >= 3:
         return "Moderate"
     else:
-        return "Weak" 
+        return "Weak"
 
+# Point d'entrée principal
 def main():
+    # Gestion des arguments en ligne de commande
     parser = argparse.ArgumentParser(description="Password Generator")
-    parser.add_argument("-l", "--length", type=int, default=12, help="Length of the password")
-    parser.add_argument("--no-letters", action="store_true", help="Exclude letters")
-    parser.add_argument("--no-numbers", action="store_true", help="Exclude numbers")
-    parser.add_argument("--no-symbols", action="store_true", help="Exclude symbols")
-    parser.add_argument("-n", "--number", type=int, default=1, help="Number of passwords to generate")
-    parser.add_argument("--save", action="store_true", help="Save generated passwords to a file")
+    parser.add_argument("-l", "--length", type=int, default=12, help="Length of the password.")
+    parser.add_argument("--no-letters", action="store_true", help="Exclude letters.")
+    parser.add_argument("--no-numbers", action="store_true", help="Exclude numbers.")
+    parser.add_argument("--no-symbols", action="store_true", help="Exclude symbols.")
+    parser.add_argument("-n", "--number", type=int, default=1, help="Number of passwords to generate.")
+    parser.add_argument("--save", action="store_true", help="Save generated passwords to a file.")
     args = parser.parse_args()
+
+    passwords = []
 
     for _ in range(args.number):
         password = generate_password(
@@ -81,20 +81,28 @@ def main():
             use_numbers=not args.no_numbers,
             use_symbols=not args.no_symbols
         )
+        passwords.append(password)
+
+        # Affichage des mots de passe et de leur force avec des couleurs
         print(Fore.GREEN + "Generated password: " + Style.RESET_ALL + password)
-	strength = check_password_strength(password)
-	if strength == "Weak":
-	    print(Fore.RED + f"Password strength: {strength}" + Style.RESET_ALL)
-   	elif strength == "Moderate":
+
+        strength = check_password_strength(password)
+        if strength == "Weak":
+            print(Fore.RED + f"Password strength: {strength}" + Style.RESET_ALL)
+        elif strength == "Moderate":
             print(Fore.YELLOW + f"Password strength: {strength}" + Style.RESET_ALL)
-   	else:  # Strong
+        else:
             print(Fore.BLUE + f"Password strength: {strength}" + Style.RESET_ALL)
+
         print("-" * 20)
 
-        # Save password to file if --save is used
-        if args.save:
-            with open("generated_passwords.txt", "a") as file:
-                file.write(password + "\n")
+    # Enregistrement des mots de passe dans un fichier si demandé
+    if args.save:
+        with open("generated_passwords.txt", "w") as f:
+            f.write("\n".join(passwords))
+        print(Fore.CYAN + "Passwords saved to 'generated_passwords.txt'" + Style.RESET_ALL)
 
+# Exécution si ce script est exécuté directement
 if __name__ == "__main__":
     main()
+
