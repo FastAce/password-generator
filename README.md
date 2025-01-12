@@ -13,15 +13,21 @@ A simple Python password generator that creates secure and customizable password
 
 ## Requirements
 
-- Python 3.x
-- Additional package:
-  - [Colorama](https://pypi.org/project/colorama/)
+-**Python 3.x**
+-**Dependencies:**
+  - `Colorama` (for colorful terminal output)
 
 ## Installation
 
+1. Clone the repository:
 ```bash
 git clone https://github.com/FastAce/password-generator.git
 cd password-generator
+```
+
+2. Install the dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
 ## Usage
