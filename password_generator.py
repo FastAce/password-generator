@@ -1,4 +1,4 @@
-import random
+import secrets
 import string
 import argparse
 from colorama import Fore, Style
@@ -28,7 +28,7 @@ def generate_password(length=12, use_letters=True, use_numbers=True, use_symbols
     if not chars:
         return "Error: Select at least one character type."
 
-    return ''.join(random.choice(chars) for _ in range(length))
+    return ''.join(secrets.choice(chars) for _ in range(length))
 
 # Vérificateur de force du mot de passe
 def check_password_strength(password):
