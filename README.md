@@ -13,8 +13,8 @@ A simple Python password generator that creates secure and customizable password
 
 ## Requirements
 
--**Python 3.x**
--**Dependencies:**
+- **Python 3.x**
+- **Dependencies:**
   - `Colorama` (for colorful terminal output)
 
 ## Installation
