@@ -67,6 +67,23 @@ password = generate_password(
 )
 ```
 
+## Chrome Extension
+
+### Description
+A simple Chrome extension to generate secure passwords directly in your browser.
+
+### Installation
+1. Download or clone this repository.
+2. Go to `chrome://extensions` in Chrome.
+3. Enable **Developer mode**.
+4. Click **Load unpacked** and select the `chrome-extension` folder.
+
+### Features
+- Generate secure passwords
+- Customize options (length, special characters, etc.)
+- Simple and user-friendly interface
+
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
