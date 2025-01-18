@@ -1,6 +1,6 @@
 # Password Generator
 
-A simple Python password generator that creates secure and customizable passwords.
+The goal of this project is to create a simple Python password generator that creates secure and customizable passwords.
 
 ## Features
 
